@@ -12,15 +12,18 @@ class Error
         $this->errors = [];
     }
 
-    public function add($error) {
+    public function add($error)
+    {
         $this->errors[] = $error;
     }
 
-    public function get() {
+    public function get()
+    {
         return implode(PHP_EOL, $this->errors);
     }
 
-    public function hasErrors() {
+    public function hasErrors()
+    {
         return count($this->errors);
     }
 

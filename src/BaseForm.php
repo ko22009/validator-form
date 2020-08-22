@@ -14,11 +14,13 @@ abstract class BaseForm
 
     abstract public function validate();
 
-    public function getErrors() {
+    public function getErrors()
+    {
         return $this->error->get();
     }
 
-    public function hasErrors() {
+    public function hasErrors()
+    {
         return $this->error->hasErrors();
     }
 

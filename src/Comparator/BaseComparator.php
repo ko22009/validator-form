@@ -52,9 +52,9 @@ abstract class BaseComparator
     private function availableComparators()
     {
         return [
-            '>' => MoreOperation::class,
-            '<' => LessOperation::class,
-            '=' => EqualOperation::class,
+            '>'  => MoreOperation::class,
+            '<'  => LessOperation::class,
+            '='  => EqualOperation::class,
             '>=' => MoreEqualOperation::class,
             '<=' => LessEqualOperation::class
         ];
@@ -64,11 +64,11 @@ abstract class BaseComparator
     {
         $value1 = $this->getFirstValue($error);
         $value2 = $this->getSecondValue($error);
-        if(is_null($value1) || is_null($value2)) return false;
+        if (is_null($value1) || is_null($value2)) return false;
 
         $comparators = $this->availableComparators();
         $index = array_search($this->comparator, array_keys($comparators));
-        if($index === false) {
+        if ($index === false) {
             $error->add($this->lang->get('NO_CORRECT_COMPARATOR'));
             return false;
         }
