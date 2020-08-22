@@ -11,7 +11,7 @@ use App\Comparator\Operations\Operation;
 use App\Error;
 use App\Lang\Lang;
 
-abstract class BaseComparator implements Comparator
+abstract class BaseComparator
 {
 
     protected string $comparator;

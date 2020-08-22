@@ -5,7 +5,7 @@ namespace App;
 class Error
 {
 
-    private $errors;
+    private array $errors;
 
     public function __construct()
     {
