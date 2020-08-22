@@ -4,5 +4,10 @@
         <testsuite name="Validator">
             <directory suffix="Test.php">src</directory>
         </testsuite>
-    </testsuites>
+</testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix="Test.php">src</directory>
+        </whitelist>
+    </filter>
 </phpunit>
