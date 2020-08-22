@@ -14,12 +14,18 @@ use App\Lang\Lang;
 abstract class BaseComparator implements Comparator
 {
 
-    protected $comparator;
+    protected string $comparator;
     protected $value1;
     protected $value2;
-    private $lang;
+    private Lang $lang;
 
-    public function __construct($value1, $comparator, $value2)
+    /**
+     * BaseComparator constructor.
+     * @param string|int $value1
+     * @param string $comparator
+     * @param string|int $value2
+     */
+    public function __construct($value1, string $comparator, $value2)
     {
         $this->value1 = $value1;
         $this->value2 = $value2;

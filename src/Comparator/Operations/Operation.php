@@ -12,6 +12,12 @@ abstract class Operation
     protected $value2;
     protected Lang $lang;
 
+    /**
+     * Operation constructor.
+     * @param string|int $value1
+     * @param string|int $value2
+     * @param Lang $lang
+     */
     public function __construct($value1, $value2, Lang $lang)
     {
         $this->value1 = $value1;

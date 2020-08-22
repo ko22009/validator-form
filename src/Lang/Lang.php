@@ -5,16 +5,17 @@ namespace App\Lang;
 class Lang
 {
 
-    private $lang;
+    private array $lang;
 
-    public function __construct($lang = null)
+    public function __construct(array $lang = null)
     {
-        if(is_null($lang)) $this->lang = include('_lang.php');
+        if (is_null($lang)) $this->lang = include('_lang.php');
         else $this->lang = $lang;
     }
 
-    public function get($name, $values = []) {
-        if(array_key_exists($name, $this->lang)) $string = $this->lang[$name];
+    public function get(string $name, array $values = [])
+    {
+        if (array_key_exists($name, $this->lang)) $string = $this->lang[$name];
         else return '';
 
         foreach ($values as $key => $value) {

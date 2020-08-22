@@ -9,10 +9,15 @@ abstract class BaseValidator
 {
 
     private $value;
-    private $name;
-    protected $lang;
+    private string $name;
+    protected Lang $lang;
 
-    public function __construct($value, $name)
+    /**
+     * BaseValidator constructor.
+     * @param string|int $value
+     * @param string $name
+     */
+    public function __construct($value, string $name)
     {
         $this->value = $value;
         $this->name = $name;
