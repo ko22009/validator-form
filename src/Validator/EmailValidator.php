@@ -10,11 +10,11 @@ class EmailValidator extends BaseValidator
     public function validate(Error $error): bool
     {
         $value = $this->getValue();
-        $isEmail = filter_var($value, FILTER_VALIDATE_EMAIL);
+        $condition = filter_var($value, FILTER_VALIDATE_EMAIL);
 
-        if (!$isEmail) $error->add($this->lang->get('NO_EMAIl') . ': ' . $this->getName());
+        if (!$condition) $error->add($this->lang->get('NO_EMAIl') . ': ' . $this->getName());
 
-        return $isEmail;
+        return $condition;
     }
 
 }

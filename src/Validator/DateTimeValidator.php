@@ -31,8 +31,7 @@ class DateTimeValidator extends BaseValidator
         $name = $this->getName();
 
         $stringValidator = new StringValidator($value, $name);
-        $isString = $stringValidator->validate($error);
-        if (!$isString) return false;
+        if (!$stringValidator->validate($error)) return false;
 
         try {
             $this->dateTime = new DateTime($value);
