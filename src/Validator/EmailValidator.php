@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Validator;
 
@@ -12,9 +12,9 @@ class EmailValidator extends BaseValidator
         $value = $this->getValue();
         $condition = filter_var($value, FILTER_VALIDATE_EMAIL);
 
-        if (!$condition) $error->add($this->lang->get('NO_EMAIl') . ': ' . $this->getName());
+        if ($condition === false) $error->add($this->lang->get('NO_EMAIl') . ': ' . $this->getName());
 
-        return $condition;
+        return $condition !== false;
     }
 
 }

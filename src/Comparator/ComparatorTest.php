@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Comparator;
 
@@ -8,7 +8,8 @@ use PHPUnit\Framework\TestCase;
 class ComparatorTest extends TestCase
 {
 
-    public function testStringLengthComparator() {
+    public function testStringLengthComparator()
+    {
         $string = 'home';
         $stringLengthComparator = new StringLengthComparator($string, '=', 4);
         $error = new Error();
