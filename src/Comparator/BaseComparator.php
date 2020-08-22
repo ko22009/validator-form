@@ -2,6 +2,12 @@
 
 namespace App\Comparator;
 
+use App\Comparator\Operations\EqualOperation;
+use App\Comparator\Operations\LessEqualOperation;
+use App\Comparator\Operations\LessOperation;
+use App\Comparator\Operations\MoreEqualOperation;
+use App\Comparator\Operations\MoreOperation;
+use App\Comparator\Operations\Operation;
 use App\Error;
 use App\Lang\Lang;
 
@@ -31,57 +37,35 @@ abstract class BaseComparator implements Comparator
         return $this->value2;
     }
 
-    private function availableComparator()
+    private function availableComparators()
     {
         return [
-            '>',
-            '<',
-            '=',
-            '>=',
-            '<='
+            '>' => MoreOperation::class,
+            '<' => LessOperation::class,
+            '=' => EqualOperation::class,
+            '>=' => MoreEqualOperation::class,
+            '<=' => LessEqualOperation::class
         ];
-    }
-
-    protected function checkComparator() {
-        return in_array($this->comparator, $this->availableComparator());
     }
 
     public function validate(Error $error)
     {
-        $correctComparator = $this->checkComparator();
-        if(!$correctComparator) $error->add($this->lang->get('NO_CORRECT_COMPARATOR'));
-        $result = false;
         $value1 = $this->getFirstValue($error);
         $value2 = $this->getSecondValue($error);
         if(is_null($value1) || is_null($value2)) return false;
-        switch ($this->comparator) {
-            case '>':
-                if(!($value1 > $value2)) {
-                    $error->add($this->lang->get('NO_MORE', [$this->value1, $this->value2]));
-                } else $result = true;
-                break;
-            case '<':
-                if(!($value1 < $value2)) {
-                    $error->add($this->lang->get('NO_LESS', [$this->value1, $this->value2]));
-                } else $result = true;
-                break;
-            case '=':
-                if(!($value1 == $value2)) {
-                    $error->add($this->lang->get('NO_EQUAL', [$this->value1, $this->value2]));
-                } else $result = true;
-                break;
-            case '>=':
-                if(!($value1 >= $value2)) {
-                    $error->add($this->lang->get('NO_MORE_EQUAL', [$this->value1, $this->value2]));
-                } else $result = true;
-                break;
-            case '<=':
-                if(!($value1 <= $value2)) {
-                    $error->add($this->lang->get('NO_LESS_EQUAL', [$this->value1, $this->value2]));
-                } else $result = true;
-                break;
+
+        $comparators = $this->availableComparators();
+        $index = array_search($this->comparator, array_keys($comparators));
+        if($index === false) {
+            $error->add($this->lang->get('NO_CORRECT_COMPARATOR'));
+            return false;
         }
-        return $result;
+        /**
+         * @var Operation $operation
+         */
+        $class = $comparators[$this->comparator];
+        $operation = new $class($value1, $value2);
+        return $operation->validate($error);
     }
 
 }
