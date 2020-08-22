@@ -25,11 +25,11 @@ class RouteFormTest extends TestCase
                 'expectedErrors'    => 2
             ],
             [
-                'departureDateTime' => null,
-                'arrivalDateTime'   => new \DateTime(),
-                'departurePlace'    => null,
+                'departureDateTime' => '',
+                'arrivalDateTime'   => '',
+                'departurePlace'    => '',
                 'arrivalPlace'      => 'Moscow',
-                'expectedErrors'    => 3
+                'expectedErrors'    => 2
             ],
         ];
     }

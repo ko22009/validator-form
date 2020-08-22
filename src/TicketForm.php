@@ -10,16 +10,27 @@ use App\Validator\EmailValidator;
 class TicketForm extends BaseForm
 {
 
-    private $email;
-    private $firstName;
-    private $lastName;
-    private $date;
-    private $time;
-    private $namePlace;
+    private string $email;
+    private string $firstName;
+    private string $lastName;
+    private string $date;
+    private string $time;
+    private string $namePlace;
     private $row;
     private $column;
 
-    public function __construct($email, $firstName, $lastName, $date, $time, $namePlace, $row, $column)
+    /**
+     * TicketForm constructor.
+     * @param string $email
+     * @param string $firstName
+     * @param string $lastName
+     * @param string $date
+     * @param string $time
+     * @param string $namePlace
+     * @param string|int $row
+     * @param string|int $column
+     */
+    public function __construct(string $email, string $firstName, string $lastName, string $date, string $time, string $namePlace, $row, $column)
     {
         parent::__construct();
         $this->email = $email;
@@ -37,10 +48,10 @@ class TicketForm extends BaseForm
         $strLenComparator = new EmailValidator($this->email, 'email');
         $strLenComparator->validate($this->error);
 
-        $strLenComparator = new StringLengthComparator($this->firstName, '>=', 2);
+        $strLenComparator = new StringLengthComparator('firstName', $this->firstName, '>=', 2, 'len');
         $strLenComparator->validate($this->error);
 
-        $strLenComparator = new StringLengthComparator($this->lastName, '>=', 2);
+        $strLenComparator = new StringLengthComparator('lastName', $this->lastName, '>=', 2, 'len');
         $strLenComparator->validate($this->error);
 
         $dateTimeValidator = new DateTimeValidator($this->date, 'date');
@@ -49,13 +60,13 @@ class TicketForm extends BaseForm
         $dateTimeValidator = new DateTimeValidator($this->time, 'time');
         $dateTimeValidator->validate($this->error);
 
-        $strLenComparator = new StringLengthComparator($this->namePlace, '>', 5);
+        $strLenComparator = new StringLengthComparator('namePlace', $this->namePlace, '>', 5, 'len');
         $strLenComparator->validate($this->error);
 
-        $intComparator = new IntegerComparator($this->row, '>', 0);
+        $intComparator = new IntegerComparator('row', $this->row, '>', 0, 'int');
         $intComparator->validate($this->error);
 
-        $intComparator = new IntegerComparator($this->column, '>', 0);
+        $intComparator = new IntegerComparator('column', $this->column, '>', 0, 'int');
         $intComparator->validate($this->error);
     }
 

@@ -18,19 +18,25 @@ abstract class BaseComparator implements Comparator
     protected $value1;
     protected $value2;
     private Lang $lang;
+    private string $name1;
+    private string $name2;
 
     /**
      * BaseComparator constructor.
+     * @param string $name1
      * @param string|int $value1
      * @param string $comparator
      * @param string|int $value2
+     * @param string $name2
      */
-    public function __construct($value1, string $comparator, $value2)
+    public function __construct($name1, $value1, string $comparator, $value2, $name2)
     {
         $this->value1 = $value1;
         $this->value2 = $value2;
         $this->comparator = $comparator;
         $this->lang = new Lang();
+        $this->name1 = $name1;
+        $this->name2 = $name2;
     }
 
     protected function getFirstValue(Error $error)
@@ -70,7 +76,7 @@ abstract class BaseComparator implements Comparator
          * @var Operation $operation
          */
         $class = $comparators[$this->comparator];
-        $operation = new $class($value1, $value2, $this->lang);
+        $operation = new $class($value1, $value2, $this->lang, $this->value1, $this->value2, $this->name1, $this->name2);
         return $operation->validate($error);
     }
 
