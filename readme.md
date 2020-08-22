@@ -1,12 +1,14 @@
 **Validators of forms**
 
 `Validators:`
-1. email
-2. integer
-3. float
-3. date
-4. time
-4. string
+1. string
+2. dateTime (date, time)
+3. integer
+4. email
+
+`Comparors:`  
+\>, \<, \=, \>=, \<=  
+for `dateTime`, `string length`
 
 `Forms:`
 1. ticket (**email, first & last name, date & time, name of place, row & column**)
