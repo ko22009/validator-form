@@ -64,7 +64,7 @@ abstract class BaseComparator implements Comparator
          * @var Operation $operation
          */
         $class = $comparators[$this->comparator];
-        $operation = new $class($value1, $value2);
+        $operation = new $class($value1, $value2, $this->lang);
         return $operation->validate($error);
     }
 
